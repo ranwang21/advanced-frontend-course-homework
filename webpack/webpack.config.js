@@ -16,10 +16,17 @@ const config = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
+            // to load scss sass file, should add sass-loader and node-sass package
             {
                 test: /\.(scss|sass)$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
-            }
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                ],
+            },
         ]
     }
 }
