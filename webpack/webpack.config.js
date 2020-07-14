@@ -39,6 +39,7 @@ const config = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ]
-}
+  }
+
 
 module.exports = config
