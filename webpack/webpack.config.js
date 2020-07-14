@@ -15,6 +15,10 @@ const config = {
         test: /\.(scss|sass)$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
+      {
+        test: /\.(png|svg|jpg|gif)/,
+        use: ['file-loader']
+      }
     ]
   }
 }
