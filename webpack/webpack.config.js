@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const config = {
     entry: './src/index.js',
@@ -26,12 +27,17 @@ const config = {
             },
         ]
     },
+    devServer: {
+        hot: true,
+        contentBase: './dist1'
+    },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
             // this index.html means the index.html in the root folder
             template: 'index.html'
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 }
 
