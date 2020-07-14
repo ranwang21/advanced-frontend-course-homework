@@ -27,7 +27,11 @@ const config = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            // this index.html means the index.html in the root folder
+            template: 'index.html'
+        })
     ]
 }
 
