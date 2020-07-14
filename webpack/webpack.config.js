@@ -39,6 +39,10 @@ const config = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ]
+<<<<<<< HEAD
   }
+=======
+}
+>>>>>>> parent of 4dc7e57... init homework
 
 module.exports = config
