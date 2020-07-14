@@ -1,6 +1,3 @@
-require('./index2.scss')
-const img = require('./images/image-analysis.png')
+require('./index.scss')
 
-console.log('hello webpack !!!')
-
-// document.getElementById('img').setAttribute('src', img)
+console.log('hello webpack!')
