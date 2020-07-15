@@ -1,3 +1,3 @@
 require('./index.scss')
 
-console.log('hello webpack!')
+document.getElementById('img')

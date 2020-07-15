@@ -5,4 +5,19 @@ body {
 .code {
   font-size: 16px;
   color: #333;
+  font-family: powerline;
+}
+
+#img {
+  width: 600px;
+  height: 600px;
+  background-image: url('./images/happy.jpg');
+  background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: 'powerline';
+  src: url('./Sauce\ Code\ Powerline\ Light.otf');
+  font-weight: 600;
+  font-style: normal;
 }
