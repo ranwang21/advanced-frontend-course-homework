@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 const config = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
     // path.join() 去拼接路径
