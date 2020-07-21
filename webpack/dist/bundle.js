@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c873f3ee3e92b3c92347";
+/******/ 	var hotCurrentHash = "7a5387859e66d36ebe7b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -798,6 +798,11 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded CSS chunks
+/******/ 	var installedCssChunks = {
+/******/ 		"main": 0
+/******/ 	}
+/******/
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
@@ -844,6 +849,47 @@
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
 /******/ 		var promises = [];
 /******/
+/******/
+/******/ 		// mini-css-extract-plugin CSS loading
+/******/ 		var cssChunks = {"0":1};
+/******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
+/******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
+/******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
+/******/ 				var href = "" + chunkId + ".css";
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				var existingLinkTags = document.getElementsByTagName("link");
+/******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
+/******/ 					var tag = existingLinkTags[i];
+/******/ 					var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
+/******/ 					if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return resolve();
+/******/ 				}
+/******/ 				var existingStyleTags = document.getElementsByTagName("style");
+/******/ 				for(var i = 0; i < existingStyleTags.length; i++) {
+/******/ 					var tag = existingStyleTags[i];
+/******/ 					var dataHref = tag.getAttribute("data-href");
+/******/ 					if(dataHref === href || dataHref === fullhref) return resolve();
+/******/ 				}
+/******/ 				var linkTag = document.createElement("link");
+/******/ 				linkTag.rel = "stylesheet";
+/******/ 				linkTag.type = "text/css";
+/******/ 				linkTag.onload = resolve;
+/******/ 				linkTag.onerror = function(event) {
+/******/ 					var request = event && event.target && event.target.src || fullhref;
+/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + request + ")");
+/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
+/******/ 					err.request = request;
+/******/ 					delete installedCssChunks[chunkId]
+/******/ 					linkTag.parentNode.removeChild(linkTag)
+/******/ 					reject(err);
+/******/ 				};
+/******/ 				linkTag.href = fullhref;
+/******/
+/******/ 				var head = document.getElementsByTagName("head")[0];
+/******/ 				head.appendChild(linkTag);
+/******/ 			}).then(function() {
+/******/ 				installedCssChunks[chunkId] = 0;
+/******/ 			}));
+/******/ 		}
 /******/
 /******/ 		// JSONP chunk loading for javascript
 /******/
@@ -993,7 +1039,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a */ \"./src/a.js\");\nPromise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.t.bind(null, /*! ./index.scss */ \"./src/index.scss\", 7));\n\nObject(_a__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\ndocument.getElementById('img');\n\nif (true) {\n  console.log('baseurl is localhost');\n} else {}\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a */ \"./src/a.js\");\n__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! ./index.scss */ \"./src/index.scss\", 7));\n\nObject(_a__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\ndocument.getElementById('img');\n\nif (true) {\n  console.log('baseurl is localhost');\n} else {}\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
