@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = {
   mode: 'development',
@@ -42,7 +43,14 @@ const config = {
     new HtmlWebpackPlugin({template: './src/index.html'}),
     new webpack.HotModuleReplacementPlugin(),
     // will delete all mannually added files in dist folder
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    // helps copying static files to dist
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, 'assets'),
+        to: 'assets'
+      }
+    ]),
   ]
 }
 
