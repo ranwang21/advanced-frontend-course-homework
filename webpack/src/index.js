@@ -1,4 +1,7 @@
-require('./index.scss')
+import('./index.scss')
+import afn from './a'
+
+afn()
 
 document.getElementById('img')
 

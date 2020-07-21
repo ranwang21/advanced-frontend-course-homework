@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 const config = {
   mode: 'development',
@@ -27,6 +28,10 @@ const config = {
         use: [
           'file-loader'
         ]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader'
       }
     ]
   },
@@ -35,7 +40,9 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({template: './src/index.html'}),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    // will delete all mannually added files in dist folder
+    new CleanWebpackPlugin()
   ]
 }
 
